@@ -202,16 +202,12 @@ __host__ __device__ constexpr mat<r, c> operator*(float scalar, const mat<r, c>&
 
 template<size_t r1, size_t r2, size_t c1, size_t c2>
 __host__ __device__ constexpr mat<r1, c2> operator*(const mat<r1, c1>& m1, const mat<r2, c2>& m2) requires(c1 == r2) {
-	mat<r1,c2> res;
+	mat<r1,c2> res{}; // init data to 0
 
 	for (size_t i = 0; i < r1; ++i) {
-		for (size_t j = 0; j < c2; ++j) {
-			float sum = 0;
-
-			for (size_t k = 0; k < c1; ++k)
-				sum += m1.data[i][k] * m2.data[k][j];
-
-			res.data[i][j] = sum;
+		for (size_t k = 0; k < c1; ++k) {
+			for (size_t j = 0; j < c2; ++j)
+				res.data[i][j] += m1.data[i][k] * m2.data[k][j];
 		}
 	}
 

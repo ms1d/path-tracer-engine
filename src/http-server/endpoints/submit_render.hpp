@@ -5,6 +5,7 @@
 #include "asio/ip/address.hpp"
 #include "httplib.h"
 #include "../helpers/gen_content.hpp"
+#include <chrono>
 #include <cstdint>
 #include <ctime>
 #include <exception>
@@ -219,11 +220,11 @@ inline void enforce_valid_objects(const nlohmann::json &json) {
 
 
 inline void create_request_file(const nlohmann::json &content) {
-	auto time_since_epoch = std::time(nullptr);
-	std::string command = std::format("mkdir -p path-tracer/requests && touch path-tracer/requests/{}.json", time_since_epoch);
+	auto time = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch());
+	std::string command = std::format("mkdir -p path-tracer/requests && touch path-tracer/requests/{}.json", time);
 	std::system(command.c_str());
 
-	std::ofstream file(std::format("path-tracer/requests/{}.json", time_since_epoch));
+	std::ofstream file(std::format("path-tracer/requests/{}.json", time));
 	file << content;
 	file.close();
 }

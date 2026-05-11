@@ -11,7 +11,7 @@
 
 
 
-#include "vec.cuh"
+#include "vec3.cuh"
 #include "precision.cuh"
 #include <iostream>
 

@@ -5,6 +5,20 @@
 A C++20 path tracer server as a personal project.
 See also `ms1d/path-tracer` and `ms1d/path-tracer-api`.
 
+## Plan
+
+### Phase 1
+
+- Start with the CPU
+
+- Take in BVH input, concurrently render over a thread pool
+
+- Stream pixels to UDP clients + send checkpoints over tcp
+
+### Phase 2
+
+- Add CUDA support to replace the CPU thread pool
+
 ## Architecture
 
 - Master process - manages 2 child processes (`http-server`, `path-tracer`)

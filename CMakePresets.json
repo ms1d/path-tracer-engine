@@ -8,12 +8,24 @@
 			"binaryDir": "build/dev",
 			"cacheVariables": {
 				"CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-				"BUILD_TESTS": "ON",
-				"CMAKE_CXX_FLAGS": "-g -Wall -Wextra -Wpedantic -Og -fuse-ld=gold",
-				"CMAKE_CUDA_FLAGS": "-g -lineinfo -Xcompiler -Wall",
+				"BUILD_TESTS": "OFF",
+				"CMAKE_CXX_FLAGS": "-g -Wall -Wextra -Wpedantic -Wshadow -Wnull-dereference -Wconversion -Og -fuse-ld=gold -fsanitize=address,undefined",
+				"CMAKE_UNITY_BUILD": "OFF"
+			}
+		},
+
+		{
+			"name": "dev-thread",
+			"displayName": "Development (-fsanitize=thread)",
+			"generator": "Ninja",
+			"binaryDir": "build/pedantic-thread",
+			"cacheVariables": {
+				"CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+				"BUILD_TESTS": "OFF",
+				"CMAKE_CXX_FLAGS": "-g -Wall -Wextra -Wpedantic -Wshadow -Wnull-dereference -Wconversion -Og -fuse-ld=gold -fsanitize=thread",
 				"CMAKE_UNITY_BUILD": "OFF",
 				"CMAKE_CXX_COMPILER": "/usr/bin/g++-15",
-				"CMAKE_CUDA_HOST_COMPILER": "/usr/bin/g++-15"
+				"CMAKE_CUDA_HOST_COMPILER" : "/usr/bin/g++-15"
 			}
 		},
 
@@ -27,22 +39,27 @@
 				"CMAKE_BUILD_TYPE": "Release",
 				"BUILD_TESTS": "OFF",
 				"CMAKE_CXX_FLAGS": "-O3 -DNDEBUG -flto=auto -fuse-ld=gold",
-				"CMAKE_CUDA_FLAGS": "-O3 --use_fast_math",
 				"CMAKE_UNITY_BUILD": "ON",
 				"CMAKE_CXX_COMPILER": "/usr/bin/g++-15",
-				"CMAKE_CUDA_HOST_COMPILER": "/usr/bin/g++-15"
+				"CMAKE_CUDA_HOST_COMPILER" : "/usr/bin/g++-15"
 			}
 		}
 	],
 
 	"buildPresets": [
 		{
+			"name": "rel",
+			"configurePreset": "rel"
+		},
+		{
 			"name": "dev",
 			"configurePreset": "dev"
 		},
 		{
-			"name": "rel",
-			"configurePreset": "rel"
+			"name": "dev-thread",
+			"configurePreset": "dev-thread"
 		}
 	]
 }
+
+

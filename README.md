@@ -1,8 +1,8 @@
-# PATH-TRACER-CUDA
+# PATH-TRACER-ENGINE
 
 ## About
 
-A CUDA C++ path tracer server as a personal project.
+A C++20 path tracer server as a personal project.
 See also `ms1d/path-tracer` and `ms1d/path-tracer-api`.
 
 ## Architecture
@@ -11,7 +11,7 @@ See also `ms1d/path-tracer` and `ms1d/path-tracer-api`.
 
 - HTTP - accepts standard REST API requests (health check, submit render)
 
-- Path Tracer - powered by cuda to run on the GPU; streams results back to UDP clients
+- Path Tracer - concurrently renders pixels; streams results back to UDP clients
 
 - Also contains a CPU only executeable for generating BVHs
 
